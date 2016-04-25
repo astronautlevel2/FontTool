@@ -1,7 +1,7 @@
 # FontTool
 This tool takes a font file with the format .bcfnt, which can be generated using the CTR SDK, and converts it into a CIA installable onto a 3DS system
 
-It requires 3dstool, ctrtool, and makerom to function.
+It requires 3dstool, ctrtool, and make_cia to function.
 
 
 ## Installing
@@ -18,7 +18,7 @@ See `FontTool.py -h`
 
 ## License / Credits
 * `FontTool.py` is under the MIT license.
-* All other tools (makerom, ctrtool, and 3dstool) are under their respective licenses
+* All other tools (make_cia, ctrtool, and 3dstool) are under their respective licenses
 
 HUGE thanks to ihaveamac for teaching me a lot of things and then bearing with my noob questions
 
