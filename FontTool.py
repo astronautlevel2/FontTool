@@ -75,6 +75,6 @@ if os.path.exists("%s.cia" % output) and not force:
 		clean()
 
 runCmd(["make_cia", "-v", "-o", "%s.cia" % output, "--content0=%s.cfa" % output,  "--index_0=0"])
-clean()
 if not xor:
 	print("Encrypt NCCH using Decrypt9 before installing or it won't work!")
+clean()
