@@ -43,6 +43,8 @@ if not os.path.exists(args.fontFile):
 	print("Font file does not exist!")
 	sys.exit(1)
 
+raw_input("Your warranty ends here! Make backups of your NAND before you install this!")
+
 runCmd(["3dstool", "-zvf", "%s" % fontFile, "--compress-type", "lzex", "--compress-out", "cbf_std.bcfnt.lz"])
 os.mkdir("romfs")
 os.rename("cbf_std.bcfnt.lz", "romfs/cbf_std.bcfnt.lz")
