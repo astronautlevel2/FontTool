@@ -4,7 +4,6 @@
 # License: MIT License
 # https://github.com/astronautlevel2/FontTool
 
-import sys
 import os
 import argparse
 import subprocess
