@@ -5,7 +5,8 @@ It requires 3dstool, ctrtool, and make_cia to function.
 
 
 ## Installing
-Drop the generated CIA into the /D9Game directory of your SD card and use Decrypt9 to encrypt NCCH
+
+Encrypt the NCCH either using xorpad mode or by encrypting it in D9 using the Encrypt (NCCH) option.
 
 **Back up your NAND before installing this! If something goes wrong you'll be bricked**
 
