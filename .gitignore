@@ -2,3 +2,5 @@
 *.bcfnt.lz
 *.cia
 *.xorpad
+*.bin
+*.cfa
