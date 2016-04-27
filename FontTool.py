@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-# FontTool.py by Alex Taber
+# FontTool.py by Alex Taber and ihaveamac
 # License: MIT License
 # https://github.com/astronautlevel2/FontTool
 
