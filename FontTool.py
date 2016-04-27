@@ -26,6 +26,7 @@ force = args.force
 xor = args.xor
 docleanup = args.nocleanup
 
+#Run a command and print the command running in case there's a failure
 def runCmd(cmd):
 	process = subprocess.Popen(cmd)
 	process.wait()
@@ -34,6 +35,7 @@ def runCmd(cmd):
 		print(cmd)
 		sys.exit(1)
 
+#Clenup if docleanup is true (which it is by default)
 def clean():
 	if docleanup:
 		os.remove("romfs/cbf_std.bcfnt.lz")
@@ -42,27 +44,38 @@ def clean():
 		os.remove("romfs-mod.bin")
 	sys.exit(1)
 
+#If output is not specified, use the fontFile's name
 if output is None:
 	output = os.path.splitext(fontFile)[0]
 
+#Check for the existence of fontFile
 if not os.path.exists(fontFile):
 	print("Font file does not exist!")
 	sys.exit(1)
 
+#Warning
 print("Your warranty ends here! Make backups of your NAND before you install this!")
 
+#Try to create romfs folder
 try:
     os.makedirs("romfs")
 except OSError:
     if not os.path.isdir("romfs"):
         raise
+        
+#Compress the font file using lz compressiong
 runCmd(["3dstool", "-zvf", "%s" % fontFile, "--compress-type", "lzex", "--compress-out", "romfs/cbf_std.bcfnt.lz"])
+#Build a modified romfs
 runCmd(["3dstool", "-cvtf", "romfs", "romfs-mod.bin", "--romfs-dir", "romfs"])
+#Build a cfa file using the modified romfs and ncchheader
 cmds = ["3dstool", "-cvtf", "cfa", "%s.cfa" % output, "--header", "ncchheader.bin", "--romfs", "romfs-mod.bin"]
 if xor:
 	print('xor romfs')
+	#Add xorpad encryption if xor is enabled
 	cmds.extend(["--romfs-xor", "0004009B00014002.Main.romfs.xorpad"])
 runCmd(cmds)
+
+#Make cfa file the proper size
 with open("%s.cfa" % output, "r+b") as fontcfa:
 	if xor:
 		fontcfa.seek(0x18F)
@@ -75,6 +88,8 @@ with open("%s.cfa" % output, "r+b") as fontcfa:
 	romfssize = binascii.unhexlify(romfssize)[::-1]
 	fontcfa.seek(0x1B4)
 	fontcfa.write(romfssize)
+
+#Warn user before overwriting file
 if os.path.exists("%s.cia" % output) and not force:
 	uinput = raw_input("Warning! Output CIA already exists! Continue? (y/n): ")
 	if (uinput == "n"):
@@ -86,7 +101,9 @@ if os.path.exists("%s.cia" % output) and not force:
 		print("Aborting due to invalid input")
 		clean()
 
+#Make the CIA
 runCmd(["make_cia", "-v", "-o", "%s.cia" % output, "--content0=%s.cfa" % output,  "--index_0=0"])
 if not xor:
 	print("Encrypt NCCH using Decrypt9 before installing or it won't work!")
+#Clean stuff up
 clean()

@@ -10,12 +10,23 @@ Encrypt the NCCH either using xorpad mode or by encrypting it in D9 using the En
 
 **Back up your NAND before installing this! If something goes wrong you'll be bricked**
 
-It's also kind of a pain to remove.
-
 It can then be installed using any CIA manager
 
 ## Usage
 See `FontTool.py -h`
+
+## Examples
+Build a CIA without xorpads and with the default output file (you'll have to encrypt NCCH):
+
+```FontTool.py -font <FILE>.bcfnt```
+
+Build a CIA with xorpads and a custom output file (no need to encrypt NCCH):
+
+```FontTool.py -font <FILE>.bcfnt -xor -custom <OUTPUT>```
+
+Build a CIA and don't cleanup files after:
+
+```FontTool.py -font <FILE>.bcfnt -nocleanup```
 
 ## License / Credits
 * `FontTool.py` is under the MIT license.
