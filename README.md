@@ -29,7 +29,7 @@ Build a CIA and don't cleanup files after:
 ```FontTool.py -font <FILE>.bcfnt -nocleanup```
 
 ## License / Credits
-* `FontTool.py` is under the MIT license.
+* `FontTool.py` is under the Smea license. See License.txt for details
 * All other tools (make_cia, ctrtool, and 3dstool) are under their respective licenses
 
 HUGE thanks to ihaveamac for teaching me a lot of things and then bearing with my noob questions
